@@ -46,13 +46,8 @@ class Tile:
         color = self.COLORS[color_index]
         return color
 
-<<<<<<< HEAD
-    def draw(self,window):
-        color= self.get_color()
-=======
     def draw(self,window): #this function draws the boxes with values
         color = self.get_color()
->>>>>>> 24951a8 (finally done, hopefully)
         pygame.draw.rect(window, color, (self.x,self.y,RECT_WIDTH,RECT_HEIGHT))
         text = FONT.render(str(self.value), 1, FONT_COLOR)
         #blit makes you put an object on top of the screen
@@ -64,25 +59,6 @@ class Tile:
 
         )
 
-<<<<<<< HEAD
-    def set_pos(self):
-        pass
-
-    def move(self,delta):
-        pass
-
-def draw_grid(window,tiles):
-    for tile in tiles.values():
-        tile.draw(window)
-    pygame.draw.rect(window,OUTLINE_COLOR,(0,0,WIDTH,HEIGHT),OUTLINE_THICKNESS)
-
-def draw(window,tiles):
-    window.fill(BACKGROUND_COLOR)
-    draw_grid(window,tiles)
-    pygame.display.update()
-
-def main(window):
-=======
     def set_pos(self,ceil=False):
         if ceil:
             self.row = math.ceil(self.x / RECT_HEIGHT)
@@ -221,18 +197,11 @@ def get_random_pos(tiles):
 
 def main(window):
 
->>>>>>> 24951a8 (finally done, hopefully)
     #clock object to regulate speed of loop
     clock = pygame.time.Clock()
     run = True
 
-<<<<<<< HEAD
-    tiles={
-        "00":Tile(128,0,0), "01":Tile(2,0,1)
-    }
-=======
     tiles=generate_tile()
->>>>>>> 24951a8 (finally done, hopefully)
 
     while run:
         clock.tick(FPS)
@@ -241,8 +210,6 @@ def main(window):
             if event.type==pygame.QUIT:
                 run = False
                 break
-<<<<<<< HEAD
-=======
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                     move_tiles(window, tiles, clock, "left")
@@ -253,7 +220,6 @@ def main(window):
                 if event.key == pygame.K_DOWN or event.key == pygame.K_s:
                     move_tiles(window, tiles, clock,"down")
 
->>>>>>> 24951a8 (finally done, hopefully)
         draw(window,tiles)
 
     pygame.quit()
