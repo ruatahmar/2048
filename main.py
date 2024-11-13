@@ -61,11 +61,11 @@ class Tile:
 
     def set_pos(self,ceil=False):
         if ceil:
-            self.row = math.ceil(self.x / RECT_HEIGHT)
-            self.col = math.ceil(self.y / RECT_WIDTH)
+            self.row = math.ceil(self.y / RECT_HEIGHT)
+            self.col = math.ceil(self.x / RECT_WIDTH)
         else:
-            self.row = math.floor(self.x / RECT_HEIGHT)
-            self.col = math.floor(self.y / RECT_WIDTH)
+            self.row = math.floor(self.y / RECT_HEIGHT)
+            self.col = math.floor(self.x / RECT_WIDTH)
             
 
     def move(self,delta):
@@ -131,7 +131,7 @@ def move_tiles(window, tiles, clock, direction):
         sort_func = lambda x:x.row
         reverse = True #ascending or nah
         delta = (0,MOVE_VEL)
-        boundary_check = lambda tile: tile.col == ROWS - 1
+        boundary_check = lambda tile: tile.row == ROWS - 1
         get_next_tile = lambda tile: tiles.get(f"{tile.row + 1}{tile.col}")
         merge_check = lambda tile,next_tile:tile.y < next_tile.y - MOVE_VEL
         move_check = lambda tile,next_tile:tile.y + RECT_WIDTH +MOVE_VEL < next_tile.y 
@@ -151,7 +151,7 @@ def move_tiles(window, tiles, clock, direction):
                 if merge_check(tile,next_tile):
                     tile.move(delta)
                 else:
-                    next_tile.value = next_tile*2
+                    next_tile.value *= 2
                     sorted_tiles.pop(i)
                     blocks.add(next_tile)
             elif move_check(tile,next_tile):
@@ -168,13 +168,14 @@ def end_move(tiles):
     if len(tiles) == 16:
         return "lost"
     row, col = get_random_pos(tiles)
-    tiles[f"{row}{col}"]=Tile(random.choice[(2,4)],row,col)
+    tiles[f"{row}{col}"] = Tile(random.choice([2, 4]), row, col)
     return "continue"
 
 def update_tiles(window, tiles, sorted_tiles):
+    tiles.clear()
     for tile in sorted_tiles:
-        if tile not in sorted_tiles:
-            tiles.pop(f"{tile.row}{tile.col}")
+        tiles[f"{tile.row}{tile.col}"] = tile
+
     draw(window,tiles)
 
 def generate_tile():
@@ -191,7 +192,7 @@ def get_random_pos(tiles):
     while True:
         row = random.randrange(0,ROWS)
         col = random.randrange(0,COLS)
-        if f"${row}${col}" not in tiles:
+        if f"{row}{col}" not in tiles:
             break
     return row, col
 
