@@ -5,7 +5,7 @@ Move the tiles around the 4×4 grid using arrow keys or WASD, combine matching n
 
 ---
 
-## 🎮 Features
+## Features
 - Smooth tile movement and merging animations
 - Randomized tile generation (2 or 4)
 - Supports **arrow keys** and **WASD** for movement
@@ -14,7 +14,7 @@ Move the tiles around the 4×4 grid using arrow keys or WASD, combine matching n
 
 ---
 
-## 🚀 How to Run
+## How to Run
 1. Clone this repository:
    ```bash
    git clone https://github.com/your-username/2048-pygame.git
